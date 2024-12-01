@@ -1,11 +1,13 @@
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tranquilo_app/features/profile/ui/screens/profile_screen.dart';
 import '../../core/di/dependency_injection.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/theming/colors_manger.dart';
 import '../../core/theming/styles.dart';
+import '../profile/logic/profile_cubit.dart';
 
 class AppLayout extends StatefulWidget {
   const AppLayout({super.key});
@@ -17,6 +19,15 @@ class AppLayout extends StatefulWidget {
 class _AppLayoutState extends State<AppLayout> {
   int selectedIndex = 0;
   List<Widget> screens = [
+    // BlocProvider(
+    //   create: (context) => getIt<RoutineCubit>()..fetchRoutines(),
+    //   child: const HomeScreen(),
+    // ),
+    // const ChatbotScreen(),
+    BlocProvider(
+      create: (context) => getIt<UserProfileCubit>()..fetchUserProfile(),
+      child: const ProfileScreen(),
+    ),
 
   ];
   PageController pageController = PageController();
@@ -80,19 +91,19 @@ class _AppLayoutState extends State<AppLayout> {
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/svgs/community_icon.svg',
+                'assets/svgs/ai_tool.svg',
                 colorFilter: ColorFilter.mode(
-                  selectedIndex == 3 ? ColorsManager.oceanBlue : Colors.grey,
+                  selectedIndex == 1 ? ColorsManager.oceanBlue : Colors.grey,
                   BlendMode.srcIn,
                 ),
               ),
-              label: 'Community',
+              label: 'AI Tools',
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 'assets/svgs/profile.svg',
                 colorFilter: ColorFilter.mode(
-                  selectedIndex == 4 ? ColorsManager.oceanBlue : Colors.grey,
+                  selectedIndex == 2 ? ColorsManager.oceanBlue : Colors.grey,
                   BlendMode.srcIn,
                 ),
               ),

@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
               },
               success: (_) {
                 context.pushNamedAndRemoveUntil(
-                  Routes.surveyStarting,
+                  Routes.appLayout,
                   predicate: (Route<dynamic> route) => false,
                 );
               },

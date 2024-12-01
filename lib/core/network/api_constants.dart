@@ -9,6 +9,8 @@ class ApiConstants {
   static const String forgetPassword = "Account/forgot-password";
   static const String verifyOtp = "Account/verify-otp";
   static const String resetPassword = "Account/reset-password";
+  static const String profile = "Profile/UserEmail/";
+  static const String delete = "Profile/Email/";
 }
 
 class ApiErrors {

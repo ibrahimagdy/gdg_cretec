@@ -11,6 +11,12 @@ import '../../features/auth/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import '../../features/auth/sign_up/ui/sign_up_screen.dart';
 import '../../features/layout/app_layout.dart';
 import '../../features/onboarding/onboarding_screen.dart';
+import '../../features/profile/data/repo/profile_repo.dart';
+import '../../features/profile/logic/profile_cubit.dart';
+import '../../features/profile/ui/screens/edit_profile_screen.dart';
+import '../../features/profile/ui/screens/notifications_settings_screen.dart';
+import '../../features/profile/ui/screens/privacy_policy_screen.dart';
+import '../../features/profile/ui/screens/settings_screen.dart';
 import '../di/dependency_injection.dart';
 import '../network/api_service.dart';
 import '/core/routing/routes.dart';
@@ -66,6 +72,30 @@ class AppRouter {
       case Routes.appLayout:
         return MaterialPageRoute(
           builder: (_) => const AppLayout(),
+        );
+      case Routes.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) =>
+            UserProfileCubit(UserProfileRepo(getIt<ApiService>()))
+              ..fetchUserProfile(),
+            child: const EditProfileScreen(),
+          ),
+        );
+      case Routes.settingsProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<UserProfileCubit>(),
+            child: const SettingsScreen(),
+          ),
+        );
+      case Routes.privacyPolicyScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PrivacyPolicyScreen(),
+        );
+      case Routes.notificationsSettingsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const NotificationsSettingsScreen(),
         );
       default:
         return MaterialPageRoute(

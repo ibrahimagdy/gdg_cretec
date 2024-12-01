@@ -10,6 +10,7 @@ import '../../features/auth/reset_password/data/models/reset_password_request_mo
 import '../../features/auth/reset_password/data/models/reset_password_response_model.dart';
 import '../../features/auth/sign_up/data/model/sign_up_request_body.dart';
 import '../../features/auth/sign_up/data/model/sign_up_response.dart';
+import '../../features/profile/data/model/profile_response_model.dart';
 import 'api_constants.dart';
 
 part 'api_service.g.dart';
@@ -43,5 +44,11 @@ abstract class ApiService {
   Future<ResetPasswordResponseModel> resetPassword(
     @Body() ResetPasswordRequestModel resetPasswordRequestModel,
   );
+
+  @GET("${ApiConstants.profile}{email}")
+  Future<ProfileResponseModel> fetchUserProfile(@Path("email") String email);
+
+  @DELETE("${ApiConstants.delete}{email}")
+  Future<void> deleteUserProfile(@Path("email") String email);
 
 }
